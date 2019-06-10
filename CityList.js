@@ -16,8 +16,10 @@ export default class CityList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://demo6468405.mockable.io/weather-crawlers/cities')
-      .then(response => response.json())
+    //fetch('http://demo6468405.mockable.io/weather-crawlers/cities')
+      // 각자의 링크
+    fetch('http://989e328a.ngrok.io/weather-crawler/available-cities')
+        .then(response => response.json())
       .then(cities => {
         console.log('cities =', cities.length);
         this.setState({
