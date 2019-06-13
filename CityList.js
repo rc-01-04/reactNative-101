@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, TextInput, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Constants} from 'expo';
 
 export default class CityList extends React.Component {
@@ -12,6 +12,7 @@ export default class CityList extends React.Component {
 
         this.state = {
             cities: [],
+            searchedCities : []
         };
     }
 
@@ -23,7 +24,8 @@ export default class CityList extends React.Component {
             .then(cities => {
                 console.log('cities =', cities.length);
                 this.setState({
-                    cities
+                    cities : cities,
+                    searchedCities : cities
                 });
             });
     }
@@ -37,6 +39,15 @@ export default class CityList extends React.Component {
         );
     }
 
+    filterList = (text)  => {
+        var searchedList = this.state.cities;
+        searchedList = searchedList.filter(function(item){
+            return item.toLowerCase().search(
+                text.toLowerCase()) !== -1;
+        });
+        this.setState({searchedCities: searchedList });
+    }
+
     renderItem(city) {
         return (
             <TouchableOpacity style={styles.item} onPress={() => this.onPressCity(city)}>
@@ -47,12 +58,18 @@ export default class CityList extends React.Component {
 
     render() {
         return (
+            <View style={styles.container}>
+                <TextInput
+                    placeholder="Type here to Search!"
+                    onChangeText={ (cities) => this.filterList(cities)}
+                />
 
                 <FlatList style={styles.container}
-                          renderItem={({item}) => this.renderItem(item)}
+                          data={this.state.searchedCities}
+                          renderItem={({ item }) => this.renderItem(item)}
                           keyExtractor={item => item}
-                          data={this.state.cities}
                 />
+            </View>
         );
     }
 }
