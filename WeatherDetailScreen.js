@@ -89,8 +89,8 @@ export default class WeatherDetailScreen extends React.Component {
                                style={styles.image}/>
                     </View>
                     <View style={styles.item2}>
-                        <Text style={styles.textWeather}>최고온도&nbsp;:&nbsp;{tempMax.toFixed(1)} </Text>
-                        <Text style={styles.textWeather}>최저온도&nbsp;:&nbsp;{tempMin.toFixed(1)} </Text>
+                        <Text style={styles.textWeather}>maxTemp&nbsp;:&nbsp;{tempMax.toFixed(1)} </Text>
+                        <Text style={styles.textWeather}>minTemp&nbsp;:&nbsp;{tempMin.toFixed(1)} </Text>
                     </View>
                 </View>
 
